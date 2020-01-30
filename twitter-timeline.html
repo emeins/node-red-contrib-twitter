@@ -1,0 +1,63 @@
+<script type="text/x-red" data-template-name="twitter-timeline">
+
+   <div class="form-row">
+        <label for="node-input-creds"> Credentials</label>
+        <input type="text" id="node-input-creds">
+    </div>
+
+    <!-- By convention, most nodes have a 'name' property. The following div -->
+    <!-- provides the necessary field. Should always be the last option      -->
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name of this Event">
+    </div>
+    <div class="form-row">
+        <label for="node-input-include_rts">Include Retweets</label>
+        <select type="text" id="node-input-include_rts">
+            <option value="true" selected="selected">true</option>
+            <option value="false">false</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-screen_name">Screen Name</label>
+        <input type="text" id="node-input-screen_name" placeholder="redconnectapp">
+    </div>
+
+</script>
+
+
+<!-- Next, some simple help text is provided for the node.                   -->
+<script type="text/x-red" data-help-name="twitter-timeline">
+
+    <h3>About</h3>
+    <p>Returns a collection of the most recent Tweets posted by the user.</p>
+
+    <h3>Use</h3>
+    <p>To use either configure the form or pass the screen name as a parameter inside the payload object ({"screen_name"":"redconnectapp"}).
+    </p>
+    <p>For more information on these parameters see the twitter API:</p>
+    <p><a href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline" target="_blank">statuses/user_timeline</a></p>
+</script>
+
+<!-- Finally, the node type is registered along with all of its properties   -->
+<!-- The example below shows a small subset of the properties that can be set-->
+<script type="text/javascript">
+    RED.nodes.registerType('twitter-timeline', {
+        category: 'social',
+        defaults: {
+            creds: {value:"", type:"twitter-client"},
+            include_rts: {value:"", default: "include_rts"},
+            name: {value:""},
+            screen_name: {value:""}
+        },
+        inputs:1,               // set the number of inputs - only 0 or 1
+        outputs:1,              // set the number of outputs - 0 to n
+        icon: "twitter.png",     // saved in  icons/myicon.png
+        color: "#C0DEED",
+        label: function() {
+            return this.name || "Timeline";
+        },
+        paletteLabel: "Timeline"
+
+    });
+</script>
